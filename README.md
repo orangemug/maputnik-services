@@ -1,5 +1,5 @@
-# services
-All the services for maputnik in a single `docker-compose.yml`
+# services
+A docker setup to get maputnik running locally
 
 [![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)][stability]
 
