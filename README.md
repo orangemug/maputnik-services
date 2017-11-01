@@ -8,9 +8,9 @@ A docker setup to get maputnik running locally
 
 Locally these are
 
- - <http://localhost:8000/> -> [website]()
- - <http://localhost:8000/editor> -> [editor]()
- - <http://localhost:8000/auth/github> -> [micro-github]()
+ - <http://localhost:8000/> -> [website](github.com/maputnik/website)
+ - <http://localhost:8000/editor> -> [editor](github.com/maputnik/editor)
+ - <http://localhost:8000/auth/github> -> [micro-github](https://github.com/mxstbr/micro-github)
 
 These all run through a [haproxy](http://www.haproxy.org/) locally. In production we will use [zeit now](https://zeit.co/now) and the [path-alias](https://zeit.co/blog/path-alias) to host the apps
 
