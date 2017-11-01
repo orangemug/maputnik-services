@@ -1,0 +1,3 @@
+[submodule "apps/micro-github"]
+	path = apps/micro-github
+	url = https://github.com/mxstbr/micro-github.git

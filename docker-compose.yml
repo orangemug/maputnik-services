@@ -1,0 +1,54 @@
+version: '3.2'
+services:
+  website:
+    build: 
+      dockerfile: Dockerfile
+      context: ./apps/maputnik-website
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/maputnik-website:/code:delegated
+    networks:
+      - mynet
+    working_dir: /code
+    command: jekyll serve --host 0.0.0.0 --port 8000 --watch --incremental
+  editor:
+    build: 
+      dockerfile: Dockerfile
+      context: ./apps/maputnik-editor
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./apps/maputnik-editor:/code:delegated
+    networks:
+      - mynet
+    working_dir: /code
+    command: npm start -- --host 0.0.0.0 --port 8001
+  micro-github:
+    build: 
+      dockerfile: Dockerfile
+      context: ./config/micro-github
+    environment:
+      PORT: 8002
+      GH_CLIENT_ID: "${MAPUTNIK_TEST_GH_CLIENT_ID}"
+      GH_CLIENT_SECRET: "${MAPUTNIK_TEST_GH_CLIENT_SECRET}"
+      REDIRECT_URL: http://localhost:8080/website/
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./apps/micro-github:/code
+    command: sh -c "npm start -- -p 8002"
+    networks:
+      - mynet
+  haproxy:
+    build: 
+      dockerfile: Dockerfile
+      context: ./config/haproxy
+    ports:
+      - "8080:8080"
+      - "9000:9000"
+    networks:
+      - mynet
+networks:
+  mynet:
+    driver: bridge
