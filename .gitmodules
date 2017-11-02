@@ -1,3 +1,6 @@
 [submodule "apps/micro-github"]
 	path = apps/micro-github
 	url = https://github.com/mxstbr/micro-github.git
+[submodule "apps/gatekeeper"]
+	path = apps/gatekeeper
+	url = https://github.com/prose/gatekeeper.git

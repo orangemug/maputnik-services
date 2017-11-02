@@ -1,18 +1,18 @@
 # services
 A docker setup to get maputnik running locally
 
-[![stability-unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)][stability]
+[![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)][stability]
 
-[stability]:   https://github.com/orangemug/stability-badges#unstable
+[stability]:   https://github.com/orangemug/stability-badges#experimental
 
 
 Locally these are
 
- - <http://localhost:8000/> -> [website](github.com/maputnik/website)
- - <http://localhost:8000/editor> -> [editor](github.com/maputnik/editor)
- - <http://localhost:8000/auth/github> -> [micro-github](https://github.com/mxstbr/micro-github)
+ - <http://localhost:8000/> → [website](github.com/maputnik/website)
+ - <http://localhost:8000/editor> → [editor](github.com/maputnik/editor)
+ - <http://localhost:8000/auth/github> → [micro-github](https://github.com/mxstbr/micro-github)
 
-These all run through a [haproxy](http://www.haproxy.org/) locally. In production we will use [zeit now](https://zeit.co/now) and the [path-alias](https://zeit.co/blog/path-alias) to host the apps
+These all run through a [haproxy](http://www.haproxy.org/).
 
 
 ## Setup
@@ -57,6 +57,13 @@ docker-compose up
 ```
 
 Now head to <http://localhost:8080> and explore maputnik running on your local machine.
+
+You also need to install any deps for services from inside the container. To do that just run
+
+```bash
+$ docker-compose run <SERVICE_NAME> bash
+$ npm install <NPM_PKG_NAME> --save
+```
 
 
 
