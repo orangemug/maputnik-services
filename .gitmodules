@@ -1,0 +1,4 @@
+[submodule "apps/micro-github"]
+	path = apps/micro-github
+	url = https://github.com/orangemug/micro-github.git
+	branch = feature/scope
