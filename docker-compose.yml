@@ -32,7 +32,8 @@ services:
       PORT: 8002
       GH_CLIENT_ID: "${MAPUTNIK_TEST_GH_CLIENT_ID}"
       GH_CLIENT_SECRET: "${MAPUTNIK_TEST_GH_CLIENT_SECRET}"
-      REDIRECT_URL: http://localhost:8080/website/
+      GH_SCOPE: "repo"
+      REDIRECT_URL: http://localhost:8080/editor/
     ports:
       - "8002:8002"
     volumes:
