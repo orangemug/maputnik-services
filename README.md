@@ -5,6 +5,8 @@ A docker setup to get maputnik running locally
 
 [stability]:   https://github.com/orangemug/stability-badges#experimental
 
+**WARNING** Although working, this isn't really intended for use at the moment.
+
 
 Locally these are
 
