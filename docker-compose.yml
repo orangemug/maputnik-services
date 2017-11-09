@@ -18,6 +18,11 @@ services:
       context: ./apps/maputnik-editor
     ports:
       - "8001:8001"
+      # For testing
+      - "9001:9001"
+    environment:
+      # Is this right???
+      DOCKER_HOST: 192.168.65.1
     volumes:
       - ./apps/maputnik-editor:/code:delegated
     networks:
