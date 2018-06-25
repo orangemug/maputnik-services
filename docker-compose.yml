@@ -1,38 +1,19 @@
 version: '3.2'
 services:
-  website:
-    build: 
-      dockerfile: Dockerfile
-      context: ./apps/maputnik-website
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./apps/maputnik-website:/code:delegated
-    networks:
-      - mynet
-    working_dir: /code
-    command: jekyll serve --host 0.0.0.0 --port 8000 --watch --incremental
   editor:
-    build: 
-      dockerfile: Dockerfile
-      context: ./apps/maputnik-editor
+    image: swisstopo/service-maputnik-editor:latest
+    build: ./apps/editor
     ports:
       - "8001:8001"
-      # For testing
-      - "9001:9001"
-    environment:
-      # Is this right???
-      DOCKER_HOST: 192.168.65.1
     volumes:
-      - ./apps/maputnik-editor:/code:delegated
-    networks:
-      - mynet
+      - ./apps/editor:/code:delegated
     working_dir: /code
     command: npm start -- --host 0.0.0.0 --port 8001
   gatekeeper:
+    image: swisstopo/service-maputnik-gatekeeper:latest
     build: 
-      dockerfile: Dockerfile
-      context: ./config/gatekeeper
+      context: ./apps/gatekeeper
+      dockerfile: ../../config/gatekeeper/Dockerfile
     environment:
       OAUTH_CLIENT_ID: "${GK_OAUTH_CLIENT_ID}"
       OAUTH_CLIENT_SECRET: "${GK_OAUTH_CLIENT_SECRET}"
@@ -40,18 +21,12 @@ services:
       - "9999:9999"
     volumes:
       - ./apps/gatekeeper:/code
+    working_dir: /code
     command: sh -c "node index.js"
-    networks:
-      - mynet
   haproxy:
+    image: swisstopo/service-maputnik-haproxy:latest
     build: 
       dockerfile: Dockerfile
       context: ./config/haproxy
     ports:
       - "8080:8080"
-      - "9000:9000"
-    networks:
-      - mynet
-networks:
-  mynet:
-    driver: bridge

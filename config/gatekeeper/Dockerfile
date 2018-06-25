@@ -1,5 +1,14 @@
 FROM node:8
 
-WORKDIR /code
+EXPOSE 9999
+
+ENV HOME /gatekeeper
+RUN mkdir ${HOME}
+
+COPY . ${HOME}/
+
+WORKDIR ${HOME}
+
+RUN npm install
 
 CMD node index.js
