@@ -12,34 +12,22 @@ Locally these are
 
  - <http://localhost:8000/> → [website](github.com/maputnik/website)
  - <http://localhost:8000/editor> → [editor](github.com/maputnik/editor)
- - <http://localhost:8000/auth/github> → [micro-github](https://github.com/mxstbr/micro-github)
+ - <http://localhost:8000/gatekeeper> → [gatekeeper](https://github.com/prose/gatekeeper)
 
 These all run through a [haproxy](http://www.haproxy.org/).
 
-
-## Setup
-To get this up and running locally you'll need all the apps cloned to the same directory as this repo. We use symlinks in the [./apps](/apps) directory so the exact location is important. A directory structure like the following is recommended
-
-```
-maputnik
-├── editor
-├── services
-└── website
-```
-
-**Note:** We use symlinks so hacking on apps is easier, all the code is checked out already so you can make a pull request to any part of the application.
 
 
 ### Enviroment variables
 There are certain keys that are required to get a fully working maputnik locally.
 
-#### micro-github 
+#### gatekeeper 
 Our micro-github instance expects github OAuth id and secrets.
 
 ```bash
 # Add to your ~/.profile or ~/.bashrc
-export MAPUTNIK_TEST_GH_CLIENT_ID=000000000000
-export MAPUTNIK_TEST_GH_CLIENT_SECRET=000000000000
+export GK_OAUTH_CLIENT_ID=000000000000
+export GK_OAUTH_CLIENT_SECRET=000000000000
 ```
 
 Where `000000000000` is replaced with your details.
@@ -59,15 +47,6 @@ docker-compose up
 ```
 
 Now head to <http://localhost:8080> and explore maputnik running on your local machine.
-
-You also need to install any deps for services from inside the container. To do that just run
-
-```bash
-$ docker-compose run <SERVICE_NAME> bash
-$ npm install <NPM_PKG_NAME> --save
-```
-
-
 
 ## License
 [MIT](LICENSE)
