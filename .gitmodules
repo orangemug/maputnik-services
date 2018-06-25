@@ -1,4 +1,4 @@
-[submodule "apps/micro-github"]
-	path = apps/micro-github
-	url = https://github.com/orangemug/micro-github.git
-	branch = feature/scope
+[submodule "apps/gatekeeper"]
+	path = apps/gatekeeper
+	url = https://github.com/prose/gatekeeper.git
+	branch = development
