@@ -5,8 +5,8 @@ Build on top of [@orangemug work](https://github.com/orangemug/maputnik-services
 
 Locally these are
 
- - <http://localhost:8000/> → [editor](github.com/maputnik/editor)
- - <http://localhost:8000/gatekeeper> → [gatekeeper](https://github.com/prose/gatekeeper)
+ - <http://localhost:8080/> → [editor](github.com/maputnik/editor)
+ - <http://localhost:8080/gatekeeper> → [gatekeeper](https://github.com/prose/gatekeeper)
 
 These all run through a [haproxy](http://www.haproxy.org/).
 
@@ -30,7 +30,7 @@ Where `000000000000` is replaced with your details.
 Make sure you have [docker](https://www.docker.com/) installed and run.
 
 ```
-git subdmodule init update
+git subdmodule update --init
 make user
 make dockerbuild
 ```
