@@ -2,3 +2,6 @@
 	path = apps/gatekeeper
 	url = https://github.com/prose/gatekeeper.git
 	branch = development
+[submodule "apps/editor"]
+	path = apps/editor
+	url = git@github.com:geoadmin/editor
