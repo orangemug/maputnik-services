@@ -46,7 +46,7 @@ Now head to <http://localhost:8080> and explore maputnik running on your local m
 ## License
 [MIT](LICENSE)
 
-##TODO
+## TODO
   - Create the OAUTH app in geoadmin
   - Put the GK_OAUTH_CLIENT_ID and GK_OAUTH_CLIENT_SECRET in gopass and read them from there
   - Encapsulate the docker-compose for rancher deploy
