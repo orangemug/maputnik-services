@@ -37,11 +37,11 @@ dockerrun:
 	export RANCHER_DEPLOY=false && make docker-compose.yml && docker-compose up -d
 
 .PHONY: rancherdeploydev
-rancherdeploydev: guard-RANCHER_ACCESS_KEY \
-                  guard-RANCHER_SECRET_KEY \
-                  guard-RANCHER_URL
+rancherdeploydev: guard-RANCHER_ACCESS_KEY_DEV \
+                  guard-RANCHER_SECRET_KEY_DEV \
+                  guard-RANCHER_URL_DEV
 	export RANCHER_DEPLOY=true && make docker-compose.yml
-	$(call start_service,$(RANCHER_ACCESS_KEY),$(RANCHER_SECRET_KEY),$(RANCHER_URL),dev)
+	$(call start_service,$(RANCHER_ACCESS_KEY_DEV),$(RANCHER_SECRET_KEY_DEV),$(RANCHER_URL_DEV),dev)
 
 .PHONY: dockerpurge
 dockerpurge:
