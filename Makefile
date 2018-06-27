@@ -60,7 +60,7 @@ dockerpurge:
 	fi
 .PHONY: dockerarmageddon	
 dockerarmageddon:
-	sudo docker rm -f $(docker ps -a | tail -n +2 | awk '{print $1}') && sudo docker rmi -f $(docker images | tail -n +2 | awk '{print $3}')
+	sudo docker rm -f $(docker ps -a | tail -n +2 | awk '{print $1}') ; sudo docker rmi -f $(docker images | tail -n +2 | awk '{print $3}')
 #${PYTHON_DIR}:
 #	virtualenv ${PYTHON_DIR}
 
