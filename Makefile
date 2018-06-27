@@ -30,11 +30,11 @@ user: editor gatekeeper
 
 .PHONY: dockerbuild
 dockerbuild:
-	export RANCHER_DEPLOY=false && make docker-compose.yml && docker-compose build
+	export RANCHER_DEPLOY=false && source rc_gopass && make docker-compose.yml && docker-compose build
 
 .PHONY: dockerrun
 dockerrun:
-	export RANCHER_DEPLOY=false && make docker-compose.yml && docker-compose up -d
+	export RANCHER_DEPLOY=false && source rc_gopass && make docker-compose.yml && docker-compose up -d
 
 .PHONY: rancherdeploydev
 rancherdeploydev: guard-RANCHER_ACCESS_KEY_DEV \
