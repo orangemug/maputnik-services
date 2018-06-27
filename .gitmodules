@@ -1,6 +1,6 @@
 [submodule "apps/gatekeeper"]
 	path = apps/gatekeeper
-	url = https://github.com/prose/gatekeeper.git
+	url = https://github.com/geoadmin/web-gatekeeper.git
 	branch = development
 [submodule "apps/editor"]
 	path = apps/editor

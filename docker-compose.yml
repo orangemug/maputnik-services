@@ -13,7 +13,7 @@ services:
     image: swisstopo/service-maputnik-gatekeeper:latest
     build: 
       context: ./apps/gatekeeper
-      dockerfile: ./apps/gatekeeper/Dockerfile
+      dockerfile: ../config/gatekeeper/Dockerfile
     environment:
       OAUTH_CLIENT_ID: "${GK_OAUTH_CLIENT_ID}"
       OAUTH_CLIENT_SECRET: "${GK_OAUTH_CLIENT_SECRET}"
