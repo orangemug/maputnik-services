@@ -5,3 +5,4 @@
 [submodule "apps/editor"]
 	path = apps/editor
 	url = git@github.com:geoadmin/editor
+	branch = master
