@@ -4,5 +4,5 @@
 	branch = development
 [submodule "apps/editor"]
 	path = apps/editor
-	url = git@github.com:geoadmin/editor
+	url = git@github.com:geoadmin/web-maputnik-editor
 	branch = master
