@@ -20,6 +20,7 @@ help:
 	@echo "- dockerbuild          Builds all images via docker-compose"
 	@echo "- dockerrun            Launches all the containers for the service"
 	@echo "- dockerpurge          Remove all docker related docker containers and images"
+	@echo "- dockerarmageddon     Remove ALL docker containers and images from the system, use it with respect"
 	@echo "- rancherdeploydev     Deploys the app to Rancher"
 	@echo "- clean                Remove generated templates"
 	@echo "- cleanall             Remove all build artefacts"
@@ -57,6 +58,9 @@ dockerpurge:
 	@if test "$(shell docker images -q swisstopo/service-maputnik-haproxy)" != ""; then \
 		sudo docker rmi -f swisstopo/service-maputnik-haproxy:latest; \
 	fi
+.PHONY: dockerarmageddon	
+dockerarmageddon:
+	sudo docker rm -f $(docker ps -a | tail -n +2 | awk '{print $1}') && sudo docker rmi -f $(docker images | tail -n +2 | awk '{print $3}')
 #${PYTHON_DIR}:
 #	virtualenv ${PYTHON_DIR}
 
