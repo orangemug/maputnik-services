@@ -5,9 +5,9 @@ services:
     build: ./apps/editor
     ports:
       - "8001:8001"
-    volumes:
-      - ./apps/editor:/code:delegated
-    working_dir: /code
+#    volumes:
+#      - ./apps/editor:/code:delegated
+#    working_dir: /code
     command: npm start -- --host 0.0.0.0 --port 8001
   gatekeeper:
     image: swisstopo/service-maputnik-gatekeeper:latest
@@ -18,9 +18,9 @@ services:
       OAUTH_CLIENT_SECRET: "${GK_OAUTH_CLIENT_SECRET}"
     ports:
       - "9999:9999"
-    volumes:
-      - ./apps/gatekeeper:/code
-    working_dir: /code
+#    volumes:
+#      - ./apps/gatekeeper:/code
+#    working_dir: /code
     command: sh -c "node index.js"
   haproxy:
     image: swisstopo/service-maputnik-haproxy:latest
