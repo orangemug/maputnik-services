@@ -4,8 +4,8 @@ services:
     image: swisstopo/service-maputnik-editor:latest
     build: ./apps/editor
     ports:
-      - "8011:8011"
-    command: npm start -- --host 0.0.0.0 --port 8011
+      - "8010:8010"
+    command: npm start -- --host 0.0.0.0 --port 8010
   gatekeeper:
     image: swisstopo/service-maputnik-gatekeeper:latest
     build: 
@@ -14,5 +14,5 @@ services:
       OAUTH_CLIENT_ID: "${GK_OAUTH_CLIENT_ID}"
       OAUTH_CLIENT_SECRET: "${GK_OAUTH_CLIENT_SECRET}"
     ports:
-      - "8010:8010"
+      - "8011:8011"
     command: sh -c "node index.js"
