@@ -1,0 +1,6 @@
+export RANCHER_ACCESS_KEY_DEV=$(gopass infra-gopass-bgdi/jenkins-rancher/RANCHER_ACCESS_KEY_DEV)
+export RANCHER_SECRET_KEY_DEV=$(gopass infra-gopass-bgdi/jenkins-rancher/RANCHER_SECRET_KEY_DEV)
+export RANCHER_URL_DEV=$(gopass infra-gopass-bgdi/jenkins-rancher/RANCHER_URL_DEV)
+export GK_OAUTH_CLIENT_ID=$(gopass infra-gopass-bgdi/github/gatekeeper/id)
+export GK_OAUTH_CLIENT_SECRET=$(gopass infra-gopass-bgdi/github/gatekeeper/secret)
+

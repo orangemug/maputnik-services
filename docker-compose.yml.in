@@ -1,24 +1,34 @@
 version: '2'
 services:
   editor:
-    image: oterral/service-maputnik-editor:staging
+    image: swisstopo/service-maputnik-editor:${image_tag}
+% if rancher_deploy == 'false':
+    build: ./apps/editor
+% endif
     ports:
       - "8010:8010"
     command: npm start -- --host 0.0.0.0 --port 8010
+% if ci == 'false':
     network_mode: 'host'
+% endif
     labels:
       io.rancher.scheduler.affinity:host_label: application=tod,staging=dev
       io.rancher.container.pull_image: always
       io.rancher.scheduler.global: 'true'
   gatekeeper:
-    image: oterral/service-maputnik-gatekeeper:staging
+    image: swisstopo/service-maputnik-gatekeeper:${image_tag}
+% if rancher_deploy == 'false':
+    build: ./apps/gatekeeper
+% endif
     environment:
-      OAUTH_CLIENT_ID: fea7cb6d19029efce200
-      OAUTH_CLIENT_SECRET: 7287c2d4e8985160463ea96cbc3f87d0c5739e41
+      OAUTH_CLIENT_ID: ${gk_oauth_client_id}
+      OAUTH_CLIENT_SECRET: ${gk_oauth_client_secret}
     ports:
       - "8011:8011"
     command: sh -c "node index.js"
+% if ci == 'false':
     network_mode: 'host'
+% endif
     labels:
       io.rancher.scheduler.affinity:host_label: application=tod,staging=dev
       io.rancher.container.pull_image: always

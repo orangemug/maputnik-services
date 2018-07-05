@@ -1,4 +1,8 @@
-[submodule "apps/micro-github"]
-	path = apps/micro-github
-	url = https://github.com/orangemug/micro-github.git
-	branch = feature/scope
+[submodule "apps/gatekeeper"]
+	path = apps/gatekeeper
+	url = https://github.com/geoadmin/service-gatekeeper.git
+	branch = development
+[submodule "apps/editor"]
+	path = apps/editor
+	url = git@github.com:geoadmin/web-maputnik-editor
+	branch = master
