@@ -1,0 +1,6 @@
+version: '2'
+services:
+  editor:
+    start_on_create: true
+  gatekeeper:
+    start_on_create: true
