@@ -8,7 +8,6 @@ CURRENT_DIR = $(shell pwd)
 PYTHON_DIR = .venv
 NODE_DIR = node_modules
 SUBMODULE_DIR = tileserver-gl
-MAPUTNIK_ROOT = ${CURRENT_DIR}/maputnik-editor
 MAKO_CMD = ${PYTHON_DIR}/bin/mako-render
 PIP_CMD = ${PYTHON_DIR}/bin/pip
 
@@ -26,15 +25,15 @@ help:
 	@echo ""
 
 .PHONY: user
-user: editor gatekeeper
+user: ${PYTHON_DIR}/requirements.timestamp editor gatekeeper
 
 .PHONY: dockerbuild
-dockerbuild:
-	export RANCHER_DEPLOY=false && source rc_gopass && make docker-compose.yml && docker-compose build
+dockerbuild: 
+	export RANCHER_DEPLOY=false && make docker-compose.yml && docker-compose build
 
 .PHONY: dockerrun
 dockerrun:
-	export RANCHER_DEPLOY=false && source rc_gopass && make docker-compose.yml && docker-compose up -d
+	export RANCHER_DEPLOY=false && make docker-compose.yml && docker-compose up -d
 
 .PHONY: rancherdeploydev
 rancherdeploydev: guard-RANCHER_ACCESS_KEY_DEV \
@@ -58,26 +57,31 @@ dockerpurge:
 		sudo docker rmi -f swisstopo/service-maputnik-haproxy:latest; \
 	fi
 
-#${PYTHON_DIR}:
-#	virtualenv ${PYTHON_DIR}
+${PYTHON_DIR}:
+	virtualenv ${PYTHON_DIR}
 
-#${PYTHON_DIR}/requirements.timestamp: ${PYTHON_DIR} requirements.txt
-#	${PIP_CMD} install -r requirements.txt
-#	touch $@
+${PYTHON_DIR}/requirements.timestamp: ${PYTHON_DIR} requirements.txt
+	${PIP_CMD} install -r requirements.txt
+	touch $@
 
 #${NODE_DIR}/package.timestamp: package.json
 #	npm install
 #	touch $@
 
-#docker-compose.yml::
-#	source rc_user && ${MAKO_CMD} --var "rancher_deploy=${RANCHER_DEPLOY}" --var "ci=${CI}" --var "image_tag=${IMAGE_TAG}" docker-compose.yml.in > $@
-
-#nginx/nginx.conf::
-#	source rc_user && ${MAKO_CMD} --var "maputnik_root=${MAPUTNIK_ROOT}" nginx/nginx.conf.in > $@
+docker-compose.yml: guard-GK_OAUTH_CLIENT_ID \
+                    guard-GK_OAUTH_CLIENT_SECRET
+	source rc_user && ${MAKO_CMD} \
+	       --var "rancher_deploy=${RANCHER_DEPLOY}" \
+	       --var "ci=${CI}" \
+	       --var "image_tag=${IMAGE_TAG}" \
+	       --var "gk_oauth_client_id=${GK_OAUTH_CLIENT_ID}" \
+	       --var "gk_oauth_client_secret=${GK_OAUTH_CLIENT_SECRET}" \
+	       --var "image_tag=${IMAGE_TAG}" \
+	       docker-compose.yml.in > $@
 
 define start_service
-	rancher --access-key $1 --secret-key $2 --url $3 rm --stop --type stack service-maputnik-$4 || echo "Nothing to remove"
-	rancher --access-key $1 --secret-key $2 --url $3 up --stack service-maputnik-$4 --pull --force-upgrade --confirm-upgrade -d
+	#rancher --access-key $1 --secret-key $2 --url $3 rm --stop --type stack service-tileservergl-$4 || echo "Nothing to remove"
+	rancher --access-key $1 --secret-key $2 --url $3 up --stack service-tileservergl-$4 --pull --force-upgrade --confirm-upgrade -d
 endef
 
 guard-%:
@@ -99,9 +103,10 @@ gatekeeper:
 
 .PHONY: clean
 clean:
-	#rm -f docker-compose.yml
+	rm -f docker-compose.yml
 
 .PHONY: cleanall
 cleanall: clean
+	rm -rf ${PYTHON_DIR}
 	rm -rf apps/editor/${NODE_DIR}
 	rm -rf apps/gatekeeper/${NODE_DIR}
