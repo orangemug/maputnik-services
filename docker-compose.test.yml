@@ -1,0 +1,23 @@
+version: '3.2'
+services:
+  editor:
+    build: 
+      dockerfile: Dockerfile
+      context: ./config/editor
+      args:
+        NODE_ENV: development
+    ports:
+      - "9001:9001"
+      - "9002:9002"
+    environment:
+      DOCKER_HOST: "docker.for.mac.host.internal"
+      NODE_ENV: development
+    volumes:
+      - ./apps/maputnik-editor:/code:delegated
+      - ./apps/maputnik-editor/.dockerignore:/code/.dockerignore:delegated
+    networks:
+      - mynet
+    working_dir: /code
+networks:
+  mynet:
+    driver: bridge

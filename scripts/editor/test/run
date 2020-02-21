@@ -1,0 +1,38 @@
+#/usr/bin/env bash
+set -e
+
+# Kill all the child processes, from <https://stackoverflow.com/a/2173421>
+trap 'trap - SIGTERM && kill -- -$$' SIGINT SIGTERM EXIT
+
+SELENIUM_START_CMD="./bash_modules/bash-selenium-standalone/bin/bash-selenium-standalone"
+
+cleanup=0
+while getopts ":hv-:" opt; do
+  echo "$opt"
+  case $opt in
+    -)
+      case "${OPTARG}" in
+        cleanup)
+          cleanup=1
+          shift 1
+        ;;
+      esac;;
+  esac
+done
+
+# This runs in the background and gets killed when the parent dies.
+(
+  while [ 1 ]
+  do
+    if [ "$cleanup" -gt 0 ]; then
+      "$SELENIUM_START_CMD" --cleanup
+    else
+      "$SELENIUM_START_CMD"
+    fi
+    echo "Warning: selenium-standalone crashed, restarting..."
+    sleep 1
+  done
+) &
+
+# Test!
+docker-compose -f docker-compose.test.yml run --service-ports editor npm run test

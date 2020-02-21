@@ -1,11 +1,11 @@
-# services
-A docker setup to get maputnik running locally
+# maputnik-services
+**WARNING** Although working, it's not indended for use yet. It still needs some further testing.
+
+A docker setup to get Maputnik running locally intended for easy development. Join the crew!
 
 [![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)][stability]
 
 [stability]:   https://github.com/orangemug/stability-badges#experimental
-
-**WARNING** Although working, this isn't really intended for use at the moment.
 
 
 Locally these are
@@ -27,22 +27,7 @@ maputnik
 └── website
 ```
 
-**Note:** We use symlinks so hacking on apps is easier, all the code is checked out already so you can make a pull request to any part of the application.
-
-
-### Enviroment variables
-There are certain keys that are required to get a fully working maputnik locally.
-
-#### micro-github 
-Our micro-github instance expects github OAuth id and secrets.
-
-```bash
-# Add to your ~/.profile or ~/.bashrc
-export MAPUTNIK_TEST_GH_CLIENT_ID=000000000000
-export MAPUTNIK_TEST_GH_CLIENT_SECRET=000000000000
-```
-
-Where `000000000000` is replaced with your details.
+**Note:** We use symlinks so developing the apps is easier, all the code is checked out already so you can make a pull request to any part of the application.
 
 
 ## Usage
@@ -60,14 +45,35 @@ docker-compose up
 
 Now head to <http://localhost:8080> and explore maputnik running on your local machine.
 
-You also need to install any deps for services from inside the container. To do that just run
+You also need to install any deps for services from inside the container. To do that run
 
 ```bash
 $ docker-compose run <SERVICE_NAME> bash
 $ npm install <NPM_PKG_NAME> --save
 ```
 
+So on first boot you'll need to run
 
+```bash
+$ docker-compose run editor bash
+$ npm install
+```
+
+
+### Enviroment variables
+Host machine environment variables.
+There are certain keys that are required to get a fully working maputnik locally.
+
+#### micro-github (not currently required)
+Our micro-github instance expects github OAuth id and secrets.
+
+```bash
+# Add to your ~/.profile or ~/.bashrc
+export MAPUTNIK_TEST_GH_CLIENT_ID=000000000000
+export MAPUTNIK_TEST_GH_CLIENT_SECRET=000000000000
+```
+
+Where `000000000000` is replaced with your details.
 
 ## License
 [MIT](LICENSE)

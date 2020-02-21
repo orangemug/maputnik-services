@@ -15,16 +15,17 @@ services:
   editor:
     build: 
       dockerfile: Dockerfile
-      context: ./apps/maputnik-editor
+      context: ./config/editor
+      args:
+        NODE_ENV: development
     ports:
       - "8001:8001"
-      # For testing
-      - "9001:9001"
     environment:
-      # Is this right???
-      DOCKER_HOST: 192.168.65.1
+      DOCKER_HOST: "docker.for.mac.host.internal"
+      NODE_ENV: development
     volumes:
       - ./apps/maputnik-editor:/code:delegated
+      - ./apps/maputnik-editor/.dockerignore:/code/.dockerignore:delegated
     networks:
       - mynet
     working_dir: /code
